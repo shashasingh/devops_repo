@@ -14,13 +14,13 @@ pipeline {
 
         stage('Clean') {
             steps {
-                sh 'mvn clean'
+                sh 'mvn clean --file hellowordapp/pom.xml'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn package'
+                sh 'mvn package --file hellowordapp/pom.xml'
             }
         }
 
