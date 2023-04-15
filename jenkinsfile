@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+     tools {
+            maven 'Maven'
+        }
+
     stages {
         stage('Checkout') {
             steps {
@@ -10,13 +14,13 @@ pipeline {
 
         stage('Clean') {
             steps {
-                sh 'clean'
+                sh 'mvn clean'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'package'
+                sh 'mvn package'
             }
         }
 
