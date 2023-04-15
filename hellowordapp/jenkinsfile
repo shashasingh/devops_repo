@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Clean') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+
+        stage('Create WAR') {
+            steps {
+                sh 'mkdir -p target'
+                sh 'cp target/*.war target/app.war'
+            }
+            post {
+                success {
+                    archiveArtifacts 'target/app.war'
+                }
+            }
+        }
+    }
+}
